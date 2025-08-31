@@ -1,36 +1,16 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Spíu Gallery
 
-## Getting Started
+A fast, secure **tattoo portfolio & booking site** built with **Next.js (App Router) + Tailwind**, deployed on **Vercel**, and powered by a lightweight **AWS contact pipeline** (API Gateway → Lambda → SES) with **S3 backups**. Images are served from **Cloudinary**. v1 ships static-first (ISR) using JSON; v1.1 adds booking & commissions.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Architecture
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Hosting:** Vercel (Next.js, ISR, static-first)
+- **Images:** Cloudinary
+- **Contact form:** Next.js `/api/contact` → API Gateway (HTTP) → Lambda → SES
+- **Monitoring:** CloudWatch log group + alarm on Lambda errors
+- **Backups:** Nightly GitHub Action → S3 (`artworks.json` + optional assets)
+- **Analytics:** Plausible
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
